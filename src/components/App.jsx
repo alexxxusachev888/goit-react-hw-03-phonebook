@@ -26,6 +26,17 @@ export class App extends Component {
     filter: ''
   }
 
+componentDidMount() {
+  const storagedPhonebook = JSON.parse(localStorage.getItem("phonebook"))
+  this.setState({contacts: storagedPhonebook});
+  }
+
+componentDidUpdate(prevProps, prevState) {
+  if(this.state.contacts !== prevState.contacts) {
+    localStorage.setItem("phonebook", JSON.stringify(this.state.contacts))
+  }
+}
+
 onSubmitForm = (contact) => {
     const checkDuplicate = () => {
       return this.state.contacts.some(cnt => {
@@ -58,6 +69,7 @@ onFilterList = () => {
 };
 
   render() {
+    
     const {
       onSubmitForm, 
       onFilterInput, 
