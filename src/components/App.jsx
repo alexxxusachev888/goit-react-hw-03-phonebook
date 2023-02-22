@@ -28,7 +28,7 @@ export class App extends Component {
 
 componentDidMount() {
   const storagedPhonebook = JSON.parse(localStorage.getItem("phonebook"))
-  this.setState({contacts: storagedPhonebook});
+  {storagedPhonebook && this.setState({contacts: storagedPhonebook})}
   }
 
 componentDidUpdate(prevProps, prevState) {
@@ -63,9 +63,7 @@ onFilterList = () => {
   const { filter, contacts } = this.state;
   const normalizedFilter = filter.toLowerCase();
 
-  return (contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter),
-  ));
+  return (contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter)));
 };
 
   render() {
